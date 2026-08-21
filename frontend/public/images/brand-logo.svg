@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="50%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <linearGradient id="navy-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="sky-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Outer Ring Arc (Travel Curve) -->
+  <path d="M12,60 A48,48 0 1,1 108,60 A48,48 0 0,1 24,96" stroke="url(#gold-grad)" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.9"/>
+
+  <!-- Sun Backdrop -->
+  <circle cx="60" cy="40" r="18" fill="url(#gold-grad)" opacity="0.95"/>
+
+  <!-- Mountain Silhouettes -->
+  <polygon points="32,64 48,42 64,64" fill="url(#navy-grad)" opacity="0.9"/>
+  <polygon points="52,64 68,36 88,64" fill="#0B192C"/>
+
+  <!-- Murugan Spear / Vel Motif (Stylized Golden Spearhead) -->
+  <g filter="url(#shadow)">
+    <!-- Vel Spearhead -->
+    <path d="M 28 20 C 33 26 35 34 28 48 C 21 34 23 26 28 20 Z" fill="url(#gold-grad)"/>
+    <!-- Vel Centerline Accent -->
+    <path d="M 28 22 L 28 46" stroke="#FEF3C7" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Vel Shaft -->
+    <path d="M 28 48 L 28 78" stroke="url(#gold-grad)" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Ribbon Curl on Spear -->
+    <path d="M 24 54 C 20 52 18 56 22 60 C 26 64 30 58 28 54" fill="none" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- Dual "M" Monogram & Dynamic Travel Swooshes -->
+  <path d="M 40 76 L 40 44 L 54 62 L 68 44 L 68 76" stroke="url(#navy-grad)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Overlapping Gold Swoosh (Bus & Flight Path Arc) -->
+  <path d="M 34 68 Q 62 48 94 30" stroke="url(#gold-grad)" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <!-- Airplane icon tip on swoosh -->
+  <path d="M 94 30 L 88 32 L 91 35 L 94 30 Z" fill="#F59E0B"/>
+
+  <!-- Road Base Line -->
+  <path d="M 38 78 C 55 78 72 82 92 84" stroke="url(#navy-grad)" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <path d="M 50 80 L 56 80" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 66 81 L 74 81.5" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

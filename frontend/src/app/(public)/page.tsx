@@ -11,13 +11,13 @@ import {
 } from "@/features/home";
 
 export const metadata: Metadata = {
-  title: "WanderLust | Explore Unforgettable Journeys & Tour Escapes",
+  title: "Sri Murugan Holidays | Tours & Travels",
   description:
-    "Discover handpicked destinations, curated tour packages, luxury retreats, and local guided adventures. Book your next unforgettable journey today.",
+    "Discover unforgettable journeys with comfortable travel, carefully planned tours, luxury coaches, and experiences worth remembering with Sri Murugan Holidays.",
   openGraph: {
-    title: "WanderLust | Explore Unforgettable Journeys",
+    title: "Sri Murugan Holidays | Tours & Travels",
     description:
-      "Handpicked travel packages, luxury retreats, and authentic local experiences across Kerala, Goa, Rajasthan, Bali, Dubai, and Maldives.",
+      "Travel comfortably and explore confidently across South India, temple circuits, hill stations, and curated holiday destinations.",
     type: "website",
   },
 };

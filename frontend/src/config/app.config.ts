@@ -1,7 +1,7 @@
 export const appConfig = {
-  name: "Travel Booking Platform",
+  name: "Sri Murugan Holidays",
   description:
-    "Discover and book unforgettable travel experiences.",
+    "Tours & Travels | Discover comfortable bus journeys, carefully planned tours, and unforgettable travel experiences.",
   url:
     process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
 };

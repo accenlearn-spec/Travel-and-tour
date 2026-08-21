@@ -3,8 +3,13 @@ import { QueryProvider } from "@/providers/query-provider";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Travel & Tour Booking Platform",
-  description: "Discover destinations, browse tour packages, and book unforgettable experiences.",
+  title: "Sri Murugan Holidays | Tours & Travels",
+  description: "Travel comfortably. Explore confidently. Create unforgettable journeys with Sri Murugan Holidays.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -20,4 +25,3 @@ export default function RootLayout({
     </html>
   );
 }
-
