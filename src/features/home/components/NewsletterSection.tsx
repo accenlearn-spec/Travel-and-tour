@@ -22,14 +22,14 @@ export function NewsletterSection() {
   };
 
   return (
-    <section className="py-20 bg-slate-900 text-white relative overflow-hidden">
-      {/* Background Accent Gradients */}
-      <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-emerald-600/20 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-sky-600/20 blur-3xl pointer-events-none" />
+    <section className="py-20 bg-[#0F2A5F] text-white relative overflow-hidden">
+      {/* Background Ambient Radial Glows */}
+      <div className="absolute top-0 left-1/4 h-96 w-96 rounded-full bg-[#1557A6]/25 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 h-96 w-96 rounded-full bg-[#F97316]/15 blur-3xl pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 mb-6">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-white/10 text-amber-400 border border-white/20 mb-6">
             <Mail className="h-7 w-7" />
           </div>
 
@@ -37,13 +37,13 @@ export function NewsletterSection() {
             Get Travel Inspiration in Your Inbox
           </h2>
 
-          <p className="mt-3 text-base sm:text-lg text-slate-300 max-w-xl mx-auto">
-            Subscribe to our weekly newsletter for secret deal alerts, curated travel guides, and exclusive itinerary releases.
+          <p className="mt-3 text-base text-slate-200 max-w-xl mx-auto font-normal">
+            Subscribe for seasonal tour announcements, South India pilgrimage circuit schedules, and group charter specials.
           </p>
 
           {subscribed ? (
-            <div className="mt-8 p-4 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-200 flex items-center justify-center gap-3 animate-pulse-subtle">
-              <CheckCircle className="h-6 w-6 text-emerald-400 shrink-0" />
+            <div className="mt-8 p-4 rounded-2xl bg-white/15 border border-white/25 text-white flex items-center justify-center gap-3">
+              <CheckCircle className="h-6 w-6 text-amber-400 shrink-0" />
               <span className="text-sm font-semibold">
                 Thank you for subscribing! You will receive our next curated travel digest.
               </span>
@@ -57,10 +57,10 @@ export function NewsletterSection() {
                     placeholder="Enter your email address..."
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="h-12 bg-white/10 border-white/20 text-white placeholder:text-slate-400 focus-visible:ring-emerald-400 focus-visible:border-emerald-400 rounded-xl px-4"
+                    className="h-12 bg-white/10 border-white/20 text-white placeholder:text-slate-300 focus-visible:ring-[#F97316] focus-visible:border-[#F97316] rounded-xl px-4"
                   />
                   {error && (
-                    <span className="absolute -bottom-6 left-1 text-xs text-rose-400">
+                    <span className="absolute -bottom-6 left-1 text-xs text-rose-300">
                       {error}
                     </span>
                   )}
@@ -68,14 +68,14 @@ export function NewsletterSection() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="h-12 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl px-6 shrink-0 shadow-lg shadow-emerald-950/40"
+                  className="h-12 bg-[#F97316] hover:bg-[#EA580C] text-white font-bold rounded-xl px-6 shrink-0 shadow-md cursor-pointer transition-all duration-150 hover:scale-[1.01]"
                 >
                   Subscribe
                   <Send className="h-4 w-4 ml-2" />
                 </Button>
               </div>
-              <p className="mt-4 text-xs text-slate-400">
-                We respect your privacy. Unsubscribe anytime with one click.
+              <p className="mt-4 text-xs text-slate-300">
+                We respect your privacy. No spam. Unsubscribe anytime with one click.
               </p>
             </form>
           )}

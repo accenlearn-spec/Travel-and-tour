@@ -1,96 +1,177 @@
 "use client";
 
 import Image from "next/image";
-import { Bus, ShieldCheck, Star, ArrowRight, MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Bus, ShieldCheck, Users, CalendarCheck, Headphones, Star } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import { SearchBar } from "./SearchBar";
 
 export function HeroSection() {
+  const shouldReduceMotion = useReducedMotion();
+  const transitionDelay = (delay: number) => (shouldReduceMotion ? 0 : delay);
+
   return (
-    <section className="relative min-h-[88vh] lg:min-h-[92vh] flex flex-col justify-between pt-28 pb-12 overflow-hidden bg-slate-950">
-      {/* Hero Bus Background Visual */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/hero-bus.jpg"
-          alt="Sri Murugan Holidays Luxury Tourist Coach on scenic road"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center transform scale-105 filter brightness-[0.85] contrast-[1.05]"
-        />
-        {/* Subtle Dark Navy + Gradient Overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-slate-950/75" />
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/50 to-transparent hidden md:block" />
-      </div>
+    <section className="relative w-full overflow-visible">
+      {/* ========================================================================= */}
+      {/* 1. FULL-WIDTH CINEMATIC HERO BANNER (Sri Murugan Bus Banner Artwork)     */}
+      {/* ========================================================================= */}
+      <div className="relative w-full min-h-[530px] sm:min-h-[550px] lg:min-h-[580px] overflow-hidden bg-[#0B1E40] flex flex-col justify-between">
+        
+        {/* Banner Background Image */}
+        <motion.div
+          className="absolute inset-0 z-0 pointer-events-none select-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: transitionDelay(0.0) }}
+        >
+          <Image
+            src="/images/sri-murugan-bus-banner.png"
+            alt="Sri Murugan Holidays Luxury Coach on Scenic Mountain Highway"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[70%_center] sm:object-[68%_center] lg:object-[71%_center] filter brightness-[0.98] contrast-[1.02]"
+          />
 
-      {/* Hero Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex flex-col justify-center text-white my-auto w-full">
-        <div className="max-w-3xl">
-          {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-amber-500/40 text-amber-400 text-xs sm:text-sm font-bold uppercase tracking-wider mb-6 shadow-xl">
-            <Bus className="h-4 w-4 text-amber-400 shrink-0" />
-            <span>SRI MURUGAN HOLIDAYS</span>
-            <span className="text-slate-500">•</span>
-            <span className="text-slate-200">TOURS &amp; TRAVELS</span>
-          </div>
+          {/* Directional Overlay: Deep Navy on left for high contrast readability, transparent on right for bright bus */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, rgba(15, 42, 95, 0.88) 0%, rgba(15, 42, 95, 0.72) 32%, rgba(15, 42, 95, 0.25) 60%, rgba(15, 42, 95, 0.02) 82%)",
+            }}
+          />
 
-          {/* Headline */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08] text-white drop-shadow-md">
-            Journeys Made <br />
-            <span className="bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 bg-clip-text text-transparent">
-              Memorable.
-            </span>
-          </h1>
+          {/* Subtle top vignette for upper controls contrast */}
+          <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/40 to-transparent pointer-events-none" />
+        </motion.div>
 
-          {/* Subtitle */}
-          <p className="mt-5 text-base sm:text-lg md:text-xl text-slate-200 font-normal leading-relaxed text-balance drop-shadow-sm max-w-2xl">
-            Discover unforgettable journeys with comfortable travel, carefully planned tours, and experiences worth remembering.
-          </p>
+        {/* ========================================================================= */}
+        {/* 2. TOP-RIGHT HERO CONTROLS (Find Bus | Login | Sign Up)                   */}
+        {/* ========================================================================= */}
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-6 sm:pt-7 flex items-center justify-end">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: transitionDelay(0.1) }}
+            className="flex items-center gap-3 sm:gap-4"
+          >
+            {/* Find Bus Pill Button */}
+            <Link
+              href="/#enquiry"
+              className="inline-flex items-center gap-1.5 sm:gap-2 bg-white/95 hover:bg-white text-[#0F172A] font-bold text-xs sm:text-[13px] px-3.5 sm:px-4 py-2 rounded-full border border-white/60 shadow-sm transition-all duration-150 hover:scale-[1.02] cursor-pointer"
+            >
+              <Bus className="h-3.5 w-3.5 text-[#1557A6]" />
+              <span>Find Bus</span>
+            </Link>
 
-          {/* Call to Action Buttons */}
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a href="#featured-tours">
-              <Button size="lg" className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold rounded-xl shadow-lg shadow-amber-950/50 border border-amber-400/40 cursor-pointer">
-                <Bus className="h-5 w-5 mr-2" />
-                Explore Tours
-              </Button>
-            </a>
-            <a href="#popular-destinations">
-              <Button size="lg" variant="glass" className="font-bold rounded-xl text-white hover:bg-white/15 border-white/30 cursor-pointer">
-                Plan Your Journey
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
-            </a>
-          </div>
+            {/* Login Link */}
+            <Link
+              href="/login"
+              className="text-white hover:text-amber-300 font-bold text-xs sm:text-[13px] px-2.5 sm:px-3 py-1.5 transition-colors cursor-pointer drop-shadow-xs"
+            >
+              Login
+            </Link>
 
-          {/* Trust Badges Bar */}
-          <div className="mt-10 flex flex-wrap items-center gap-6 text-xs sm:text-sm font-medium text-slate-200 border-t border-white/10 pt-6">
-            <div className="flex items-center gap-2">
-              <div className="flex -space-x-1">
-                {[1, 2, 3, 4, 5].map((idx) => (
-                  <Star key={idx} className="h-4 w-4 text-amber-400 fill-amber-400" />
-                ))}
-              </div>
-              <span><strong className="text-white font-bold">4.9/5</strong> Rating (3,500+ Trips)</span>
-            </div>
-            <div className="h-4 w-px bg-white/20 hidden sm:block" />
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-amber-400" />
-              <span>Safe &amp; Comfortable Luxury Coaches</span>
-            </div>
-            <div className="h-4 w-px bg-white/20 hidden sm:block" />
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-amber-400" />
-              <span>Temple Trips &amp; All India Circuits</span>
-            </div>
-          </div>
+            {/* Sign Up Orange Pill */}
+            <Link
+              href="/register"
+              className="bg-[#F97316] hover:bg-[#EA580C] text-white font-bold text-xs sm:text-[13px] px-4 sm:px-4.5 py-2 rounded-full shadow-sm transition-all duration-150 hover:scale-[1.02] cursor-pointer"
+            >
+              Sign up
+            </Link>
+          </motion.div>
         </div>
+
+        {/* ========================================================================= */}
+        {/* 3. HERO CONTENT ON THE LEFT                                               */}
+        {/* ========================================================================= */}
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-4 sm:pt-6 pb-28 sm:pb-32 lg:pb-36">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: transitionDelay(0.15) }}
+            className="max-w-[540px] text-left"
+          >
+            {/* Trust Pill Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[rgba(15,42,95,0.60)] backdrop-blur-md border border-[rgba(245,158,11,0.4)] text-white text-[11px] sm:text-[11.5px] font-bold tracking-wider uppercase mb-4 sm:mb-5 shadow-sm">
+              <Star className="h-3.5 w-3.5 text-[#F59E0B] fill-[#F59E0B]" />
+              <span>Safe • Comfortable • Reliable</span>
+            </div>
+
+            {/* Hero Main Heading */}
+            <h1 className="text-3xl sm:text-5xl lg:text-[56px] font-extrabold text-white tracking-tight leading-[1.06] drop-shadow-sm mb-4">
+              Travel Comfortably<br />Across India
+            </h1>
+
+            {/* Hero Subtitle Description */}
+            <p className="text-sm sm:text-base text-white/95 font-normal leading-relaxed max-w-[490px] drop-shadow-xs mb-8">
+              Book luxury coaches, tour packages, family holidays and custom bus rentals with Sri Murugan Holidays.
+            </p>
+
+            {/* Feature / Trust Row */}
+            <div className="grid grid-cols-2 sm:flex sm:items-center gap-4 sm:gap-6 pt-1">
+              {/* Feature 1: Safe & Reliable */}
+              <div className="flex items-center gap-2.5">
+                <div className="h-9 w-9 rounded-full bg-[#1557A6]/40 backdrop-blur-xs border border-[#1557A6]/60 flex items-center justify-center text-white shrink-0">
+                  <ShieldCheck className="h-4 w-4 text-amber-300" />
+                </div>
+                <div className="flex flex-col text-left leading-tight">
+                  <span className="text-xs font-bold text-white tracking-tight">Safe &amp; Reliable</span>
+                  <span className="text-[10px] sm:text-[10.5px] text-white/80 font-normal mt-0.5">Your safety is our priority</span>
+                </div>
+              </div>
+
+              {/* Feature 2: Group Friendly */}
+              <div className="flex items-center gap-2.5">
+                <div className="h-9 w-9 rounded-full bg-[#1557A6]/40 backdrop-blur-xs border border-[#1557A6]/60 flex items-center justify-center text-white shrink-0">
+                  <Users className="h-4 w-4 text-amber-300" />
+                </div>
+                <div className="flex flex-col text-left leading-tight">
+                  <span className="text-xs font-bold text-white tracking-tight">Group Friendly</span>
+                  <span className="text-[10px] sm:text-[10.5px] text-white/80 font-normal mt-0.5">Perfect for families &amp; groups</span>
+                </div>
+              </div>
+
+              {/* Feature 3: Easy Booking */}
+              <div className="flex items-center gap-2.5">
+                <div className="h-9 w-9 rounded-full bg-[#1557A6]/40 backdrop-blur-xs border border-[#1557A6]/60 flex items-center justify-center text-white shrink-0">
+                  <CalendarCheck className="h-4 w-4 text-amber-300" />
+                </div>
+                <div className="flex flex-col text-left leading-tight">
+                  <span className="text-xs font-bold text-white tracking-tight">Easy Booking</span>
+                  <span className="text-[10px] sm:text-[10.5px] text-white/80 font-normal mt-0.5">Quick enquiry &amp; hassle-free</span>
+                </div>
+              </div>
+
+              {/* Feature 4: 24/7 Support */}
+              <div className="flex items-center gap-2.5">
+                <div className="h-9 w-9 rounded-full bg-[#1557A6]/40 backdrop-blur-xs border border-[#1557A6]/60 flex items-center justify-center text-white shrink-0">
+                  <Headphones className="h-4 w-4 text-amber-300" />
+                </div>
+                <div className="flex flex-col text-left leading-tight">
+                  <span className="text-xs font-bold text-white tracking-tight">24/7 Support</span>
+                  <span className="text-[10px] sm:text-[10.5px] text-white/80 font-normal mt-0.5">We&apos;re here anytime</span>
+                </div>
+              </div>
+            </div>
+
+          </motion.div>
+        </div>
+
       </div>
 
-      {/* Floating Search Bar Integration */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-8">
+      {/* ========================================================================= */}
+      {/* 4. FLOATING SEARCHBAR OVERLAPPING BANNER BOTTOM                           */}
+      {/* ========================================================================= */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: transitionDelay(0.25) }}
+        className="relative z-30 w-full"
+      >
         <SearchBar />
-      </div>
+      </motion.div>
     </section>
   );
 }

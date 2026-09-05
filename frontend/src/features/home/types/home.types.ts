@@ -8,6 +8,7 @@ export interface Destination {
   tourCount: number;
   featured?: boolean;
   rating: number;
+  category?: string;
 }
 
 export interface Tour {

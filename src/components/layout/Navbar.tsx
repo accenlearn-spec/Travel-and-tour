@@ -2,188 +2,158 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Compass, Search, Menu, X, User } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
+import { Menu, X, Phone } from "lucide-react";
+import { BrandLogo } from "@/components/common/BrandLogo";
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = React.useState(false);
+  const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
 
+  // Lock background scrolling when mobile menu is open
   React.useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [mobileMenuOpen]);
+
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/#services" },
+    { name: "Trips", href: "/tours" },
+    { name: "Fleet", href: "/#fleet" },
+    { name: "Amenities", href: "/#amenities" },
+    { name: "About Us", href: "/#about" },
+    { name: "Contact Us", href: "/#contact" },
+  ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/90 backdrop-blur-md shadow-md py-3 border-b border-slate-100 text-slate-900"
-          : "bg-gradient-to-b from-slate-950/70 to-transparent py-5 text-white"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2.5 text-xl font-black tracking-tight group focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded-lg p-1"
-        >
-          <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-md shadow-emerald-900/20 group-hover:scale-105 transition-transform">
-            <Compass className="h-6 w-6" />
-          </div>
-          <span className="font-extrabold text-2xl tracking-tight">
-            Wander<span className="text-emerald-500">Lust</span>
-          </span>
-        </Link>
-
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-semibold">
-          <Link
-            href="#popular-destinations"
-            className={`transition-colors hover:text-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded px-1 ${
-              isScrolled ? "text-slate-700" : "text-slate-100"
-            }`}
-          >
-            Destinations
-          </Link>
-          <Link
-            href="#featured-tours"
-            className={`transition-colors hover:text-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded px-1 ${
-              isScrolled ? "text-slate-700" : "text-slate-100"
-            }`}
-          >
-            Tours
-          </Link>
-          <a
-            href="#featured-tours"
-            className={`transition-colors hover:text-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded px-1 ${
-              isScrolled ? "text-slate-700" : "text-slate-100"
-            }`}
-          >
-            Categories
-          </a>
-          <a
-            href="#why-us"
-            className={`transition-colors hover:text-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded px-1 ${
-              isScrolled ? "text-slate-700" : "text-slate-100"
-            }`}
-          >
-            About Us
-          </a>
-        </nav>
-
-        {/* Desktop Right CTA / Search & Auth Placeholders */}
-        <div className="hidden md:flex items-center gap-3">
-          <button
-            type="button"
-            aria-label="Search"
-            className={`p-2 rounded-full transition-colors ${
-              isScrolled
-                ? "text-slate-700 hover:bg-slate-100"
-                : "text-white hover:bg-white/10"
-            }`}
-          >
-            <Search className="h-5 w-5" />
-          </button>
-
-          {/* Login / Sign Up buttons (Visually present, mock action) */}
-          <Button
-            variant={isScrolled ? "ghost" : "glass"}
-            size="sm"
-            onClick={() => alert("Authentication will be implemented in Phase F2.")}
-            className="font-bold cursor-pointer"
-          >
-            Log In
-          </Button>
-
-          <Button
-            variant="default"
-            size="sm"
-            onClick={() => alert("Registration will be implemented in Phase F2.")}
-            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg shadow-sm cursor-pointer"
-          >
-            Sign Up
-          </Button>
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-slate-200/80 shadow-[0_2px_12px_rgba(15,42,95,0.04)] transition-all">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 h-[86px] sm:h-[88px] flex items-center justify-between gap-6">
+        
+        {/* Brand Logo Component */}
+        <div className="shrink-0">
+          <BrandLogo variant="navbar" lightBg={true} />
         </div>
 
-        {/* Mobile Hamburger Toggle Button */}
-        <div className="flex md:hidden items-center gap-2">
+        {/* Desktop Navigation Links */}
+        <nav className="hidden lg:flex items-center gap-8 xl:gap-9 text-[14.5px] font-semibold text-[#0F172A]">
+          {navLinks.map((link) => {
+            const isActive = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`relative py-2 transition-colors duration-200 hover:text-[#1557A6] ${
+                  isActive ? "text-[#1557A6] font-bold" : "text-slate-700"
+                }`}
+              >
+                <span>{link.name}</span>
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#1557A6] rounded-full" />
+                )}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Desktop Action Area: Support Phone Info + Enquire Now CTA */}
+        <div className="hidden lg:flex items-center gap-5 xl:gap-6 shrink-0">
+          {/* Phone / Support Information */}
+          <a
+            href="tel:+919876543210"
+            className="flex items-center gap-3 group text-left transition-opacity hover:opacity-90"
+          >
+            <div className="h-10 w-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-[#1557A6] group-hover:scale-105 transition-transform shrink-0">
+              <Phone className="h-4 w-4 fill-current" />
+            </div>
+            <div className="flex flex-col leading-tight">
+              <span className="text-sm font-bold text-[#0F172A] tracking-tight group-hover:text-[#1557A6] transition-colors">
+                +91 98765 43210
+              </span>
+              <span className="text-[11px] font-medium text-[#64748B] mt-0.5">
+                24/7 Enquiry Support
+              </span>
+            </div>
+          </a>
+
+          {/* Enquire Now Button (Vibrant Orange CTA) */}
+          <Link href="/#enquiry">
+            <button
+              type="button"
+              className="bg-[#F97316] hover:bg-[#EA580C] text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow-sm cursor-pointer transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] flex items-center gap-2"
+            >
+              <Phone className="h-4 w-4 fill-white/80" />
+              <span>Enquire Now</span>
+            </button>
+          </Link>
+        </div>
+
+        {/* Mobile Menu Toggle Button */}
+        <div className="flex lg:hidden items-center gap-2">
+          <Link
+            href="/#enquiry"
+            className="sm:hidden bg-[#F97316] text-white text-xs font-bold px-3 py-1.5 rounded-lg"
+          >
+            Enquire
+          </Link>
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-expanded={mobileMenuOpen}
             aria-label="Toggle Navigation Menu"
-            className={`p-2 rounded-lg transition-colors ${
-              isScrolled ? "text-slate-900" : "text-white"
-            }`}
+            className="p-2 rounded-lg text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors focus:outline-none focus:ring-2 focus:ring-[#1557A6]"
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
+
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white text-slate-900 border-b border-slate-200 px-4 pt-3 pb-6 shadow-xl animate-in slide-in-from-top duration-200">
-          <nav className="flex flex-col gap-4 font-semibold text-base mb-6">
-            <Link
-              href="#popular-destinations"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-1.5 border-b border-slate-100"
-            >
-              Destinations
-            </Link>
-            <Link
-              href="#featured-tours"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-1.5 border-b border-slate-100"
-            >
-              Tours
-            </Link>
-            <a
-              href="#featured-tours"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-1.5 border-b border-slate-100"
-            >
-              Categories
-            </a>
-            <a
-              href="#why-us"
-              onClick={() => setMobileMenuOpen(false)}
-              className="py-1.5 border-b border-slate-100"
-            >
-              About Us
-            </a>
-          </nav>
+        <div className="lg:hidden fixed inset-x-0 top-[86px] bottom-0 bg-slate-950/50 backdrop-blur-xs z-40 animate-in fade-in duration-200">
+          <div className="bg-white border-b border-slate-200 px-6 pt-4 pb-8 shadow-2xl animate-in slide-in-from-top duration-200 max-h-[85vh] overflow-y-auto">
+            <nav className="flex flex-col gap-1 font-semibold text-base mb-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="py-3 px-2 border-b border-slate-100 text-slate-700 hover:text-[#1557A6] hover:bg-blue-50/50 rounded-md transition-colors"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </nav>
 
-          <div className="flex flex-col gap-2.5">
-            <Button
-              variant="outline"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                alert("Authentication will be implemented in Phase F2.");
-              }}
-              className="w-full justify-center font-bold"
-            >
-              <User className="h-4 w-4 mr-2" />
-              Log In
-            </Button>
-            <Button
-              variant="default"
-              onClick={() => {
-                setMobileMenuOpen(false);
-                alert("Registration will be implemented in Phase F2.");
-              }}
-              className="w-full justify-center bg-emerald-600 hover:bg-emerald-700 text-white font-bold"
-            >
-              Sign Up
-            </Button>
+            <div className="flex flex-col gap-3 pt-2">
+              <a
+                href="tel:+919876543210"
+                className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200 text-left"
+              >
+                <div className="h-10 w-10 rounded-full bg-blue-50 flex items-center justify-center text-[#1557A6] shrink-0">
+                  <Phone className="h-4 w-4 fill-current" />
+                </div>
+                <div className="flex flex-col leading-tight">
+                  <span className="text-sm font-bold text-[#0F172A]">+91 98765 43210</span>
+                  <span className="text-xs text-[#64748B]">24/7 Enquiry Support</span>
+                </div>
+              </a>
+
+              <Link
+                href="/#enquiry"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full bg-[#F97316] hover:bg-[#EA580C] text-white font-bold text-center py-3 rounded-xl shadow-sm transition-colors"
+              >
+                Enquire Now
+              </Link>
+            </div>
           </div>
         </div>
       )}

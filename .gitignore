@@ -44,3 +44,9 @@ Thumbs.db
 # Testing / Coverage
 coverage/
 .nyc_output/
+
+# Nested duplicate directories
+frontend/frontend/
+frontend/backend/
+frontend/.github/
+
